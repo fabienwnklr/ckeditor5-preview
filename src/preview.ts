@@ -1,9 +1,12 @@
 import { Plugin } from 'ckeditor5/src/core';
 import { ButtonView } from 'ckeditor5/src/ui';
-
-import ckeditor5Icon from '../theme/icons/ckeditor.svg';
+import type { PreviewOptions } from '../typings/ckeditor5-preview';
+import previewIcon from '../theme/icons/ckeditor.svg';
 
 export default class Preview extends Plugin {
+	/**
+	 * @inheritDoc
+	 */
 	public static get pluginName() {
 		return 'Preview' as const;
 	}
@@ -11,30 +14,62 @@ export default class Preview extends Plugin {
 	public init(): void {
 		const editor = this.editor;
 		const t = editor.t;
-		const model = editor.model;
+		const previewOptions = editor.config.get( 'preview' ) as PreviewOptions;
+		editor.ui.componentFactory.add( 'preview', locale => {
+			// The button will be an instance of ButtonView.
+			const button = new ButtonView( locale );
 
-		// Add the "previewButton" to feature components.
-		editor.ui.componentFactory.add( 'previewButton', locale => {
-			const view = new ButtonView( locale );
-
-			view.set( {
+			button.set( {
 				label: t( 'Preview' ),
-				icon: ckeditor5Icon,
-				tooltip: true
+				tooltip: true,
+				icon: previewIcon
 			} );
 
-			// Insert a text into the editor after clicking the button.
-			this.listenTo( view, 'execute', () => {
-				model.change( writer => {
-					const textNode = writer.createText( 'Hello CKEditor 5!' );
+			// Execute a callback function when the button is clicked
+			button.on( 'execute', () => {
+				const content = '';
+				const myWindow = window.open( '', '_blank' );
 
-					model.insertContent( textNode );
-				} );
+				if ( myWindow ) {
+					myWindow.document.write(
+						'<html><head><title>Preview</title>'
+					);
+					myWindow.document.write(
+						'<base href="' +
+							location.origin +
+							location.pathname +
+							'">'
+					);
 
-				editor.editing.view.focus();
+					if ( previewOptions?.injectCkeCSS ) {
+						const ckeCss = document.querySelector(
+							'style[data-cke=true]'
+						);
+						myWindow.document.write(
+							'<style>' + ckeCss?.innerHTML + '</style>'
+						);
+					}
+					if ( previewOptions?.contentCSS ) {
+						myWindow.document.write(
+							'<style>' + previewOptions.contentCSS + '</style>'
+						);
+					}
+					if ( previewOptions?.srcCSS ) {
+						myWindow.document.write(
+							'<link href=' + previewOptions.srcCSS + '></style>'
+						);
+					}
+					myWindow.document.write( '</head><body>' );
+					myWindow.document.write( content );
+					myWindow.document.write( '</body></html>' );
+
+					myWindow.document.close();
+					myWindow.moveTo( 0, 0 );
+					myWindow.resizeTo( screen.width, screen.height );
+				}
 			} );
 
-			return view;
+			return button;
 		} );
 	}
 }

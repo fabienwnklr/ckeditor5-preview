@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { Preview as PreviewDll, icons } from '../src';
 import Preview from '../src/preview';
 
-import ckeditor from './../theme/icons/ckeditor.svg';
+import preview from './../theme/icons/preview.svg';
 
 describe( 'CKEditor5 Preview DLL', () => {
 	it( 'exports Preview', () => {
@@ -10,8 +10,8 @@ describe( 'CKEditor5 Preview DLL', () => {
 	} );
 
 	describe( 'icons', () => {
-		it( 'exports the "ckeditor" icon', () => {
-			expect( icons.ckeditor ).to.equal( ckeditor );
+		it( 'exports the "preview" icon', () => {
+			expect( icons.preview ).to.equal( preview );
 		} );
 	} );
 } );
