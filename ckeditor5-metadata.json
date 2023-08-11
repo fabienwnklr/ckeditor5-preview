@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    {
+      "name": "Preview",
+      "className": "Preview",
+      "description": "Adds text to the editor.",
+      "path": "src/preview.ts",
+      "uiComponents": [
+        {
+          "name": "previewButton",
+          "type": "Button",
+          "iconPath": "theme/icons/ckeditor.svg"
+        }
+      ]
+    }
+  ]
+}
