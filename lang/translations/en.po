@@ -1,0 +1,9 @@
+msgid ""
+msgstr ""
+"Language: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+msgctxt "Previe."
+msgid "Align left"
+msgstr "Align left"

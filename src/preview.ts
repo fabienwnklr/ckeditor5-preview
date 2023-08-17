@@ -1,7 +1,7 @@
 import { Plugin } from 'ckeditor5/src/core';
 import { ButtonView } from 'ckeditor5/src/ui';
 import type { PreviewOptions } from '../typings/ckeditor5-preview';
-import previewIcon from '../theme/icons/ckeditor.svg';
+import previewIcon from '../theme/icons/preview.svg';
 
 export default class Preview extends Plugin {
 	/**
@@ -27,7 +27,7 @@ export default class Preview extends Plugin {
 
 			// Execute a callback function when the button is clicked
 			button.on( 'execute', () => {
-				const content = '';
+				const content = editor.data.get();
 				const myWindow = window.open( '', '_blank' );
 
 				if ( myWindow ) {
