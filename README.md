@@ -1,4 +1,4 @@
-# @fwcie/ckeditor5-preview
+# @fabwcie/ckeditor5-preview
 
 Add button for preview ckeditor content.
 
@@ -12,7 +12,7 @@ This package was created by the [ckeditor5-package-generator](https://www.npmjs.
 ## Install
 
 ```bash
-npm install @fwcie/ckeditor5-preview
+npm install @fabwcie/ckeditor5-preview
 ```
 
 ## Available options
@@ -28,7 +28,7 @@ npm install @fwcie/ckeditor5-preview
 Using module import
 
 ```typescript
-import { Preview } from '@fwcie/ckeditor5-preview';
+import { Preview } from '@fabwcie/ckeditor5-preview';
 
 ClassicEditor
   .create( document.querySelector( '#editor' ), {
@@ -50,7 +50,7 @@ Download js file here
 <script src="path/to/preview.js"></script>
 
 <!-- Or with CDN -->
-<script src="https://cdn/@fwcie/ckeditor5-preview/preview.js"></script>
+<script src="https://cdn/@fabwcie/ckeditor5-preview/preview.js"></script>
 ```
 
 and that all, preview button appear automaticaly !
